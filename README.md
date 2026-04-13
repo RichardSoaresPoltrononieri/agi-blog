@@ -128,7 +128,7 @@ npx playwright show-report
 
 ## 🔄 Pipeline CI/CD
 
-O projeto possui integração com **GitHub Actions**. A cada push ou pull request na branch `main`, os testes são executados automaticamente em Chromium e Firefox.
+O projeto possui integração com **GitHub Actions**. A cada push ou pull request na branch `master`, os testes são executados automaticamente em Chromium e Firefox.
 
 Acesse os resultados em: `Actions` → `Playwright Tests`
 
