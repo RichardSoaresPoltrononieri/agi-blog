@@ -1,0 +1,15 @@
+{
+  "name": "agi-blog",
+  "version": "1.0.0",
+  "description": "Automação de testes para o blog da Agibank usando Playwright",
+  "scripts": {
+      "test": "playwright test",
+      "test:headed": "playwright test --headed",
+      "test:chromium": "playwright test --project=chromium",
+      "test:firefox": "playwright test --project=firefox",
+      "test:report": "playwright show-report"
+    },
+    "devDependencies": {
+      "@playwright/test": "^1.40.0"
+    }
+  }
