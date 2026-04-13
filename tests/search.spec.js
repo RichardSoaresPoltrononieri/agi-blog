@@ -44,22 +44,29 @@ test.describe('Busca no Blog do Agi', () => {
     });
 
     test('Deve exibir mensagem de sem resultados para termo inválido', async ({ page }) => {
-      const home = new HomePage(page);
+  const home = new HomePage(page);
 
-      await home.buscarViaUrl(data.busca.invalida);
+  await home.buscarViaUrl(data.busca.invalida);
 
-      await expect(page.locator('article')).toHaveCount(0);
-      await expect(page.locator('.no-results, .ast-no-search-results, [class*="no-results"]')).toBeVisible();
-    });
+  await expect(page.locator('article')).toHaveCount(0);
 
+  await expect(
+    page.getByText(/Lamentamos, mas nada foi/i)
+  ).toBeVisible({ timeout: 10000 });
+
+}); 
     test('Deve exibir mensagem de sem resultados para busca numérica', async ({ page }) => {
-      const home = new HomePage(page);
+    const home = new HomePage(page);
 
-      await home.buscarViaUrl(data.busca.numerica);
+    await home.buscarViaUrl(data.busca.numerica);
 
-      await expect(page.locator('article')).toHaveCount(0);
-      await expect(page.locator('.no-results, .ast-no-search-results, [class*="no-results"]')).toBeVisible();
-    });
+    await expect(page.locator('article')).toHaveCount(0);
+
+    await expect(
+        page.getByText(/Lamentamos, mas nada foi/i)
+    ).toBeVisible({ timeout: 10000 });
+
+});
 
     test('Deve abrir o primeiro resultado da busca corretamente', async ({ page }) => {
       const home    = new HomePage(page);
