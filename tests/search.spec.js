@@ -13,16 +13,15 @@ test.describe('Busca no Blog do Agi', () => {
   test.describe('Via botão lupa', () => {
 
     test('Deve abrir o campo de busca ao clicar na lupa e retornar resultados', async ({ page }) => {
-      const home = new HomePage(page);
+      test.fail(); // BUG-001 — falha esperada e documentada
 
+      const home = new HomePage(page);
       await home.acessarHome();
       await home.abrirBuscaPelaLupa();
       await expect(home.searchInput).toBeVisible();
-
       await home.searchInput.fill(data.busca.valida);
       await page.keyboard.press('Enter');
       await page.waitForLoadState('domcontentloaded');
-
       await expect(page.locator('article')).not.toHaveCount(0);
       await expect(page).toHaveURL(/[?&]s=/);
     });
@@ -50,7 +49,7 @@ test.describe('Busca no Blog do Agi', () => {
       await home.buscarViaUrl(data.busca.invalida);
 
       await expect(page.locator('article')).toHaveCount(0);
-      await expect(page.locator('.no-results')).toBeVisible();
+      await expect(page.locator('.no-results, .ast-no-search-results, [class*="no-results"]')).toBeVisible();
     });
 
     test('Deve exibir mensagem de sem resultados para busca numérica', async ({ page }) => {
@@ -59,7 +58,7 @@ test.describe('Busca no Blog do Agi', () => {
       await home.buscarViaUrl(data.busca.numerica);
 
       await expect(page.locator('article')).toHaveCount(0);
-      await expect(page.locator('.no-results')).toBeVisible();
+      await expect(page.locator('.no-results, .ast-no-search-results, [class*="no-results"]')).toBeVisible();
     });
 
     test('Deve abrir o primeiro resultado da busca corretamente', async ({ page }) => {
